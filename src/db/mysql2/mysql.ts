@@ -1,11 +1,15 @@
 import dotenv from "dotenv";
-import { drizzle } from "drizzle-orm/mysql2";
+import { drizzle, MySql2Database } from "drizzle-orm/mysql2";
 import mysql from "mysql2/promise";
 
 import * as schema from "./schema";
 
 declare global {
-  var _db: ReturnType<typeof drizzle> | undefined;
+  var _db:
+    | (MySql2Database<typeof schema> & {
+        $client: mysql.Pool;
+      })
+    | undefined;
 }
 
 dotenv.config({
