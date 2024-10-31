@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 import jwt from "jsonwebtoken";
 import { eq } from "drizzle-orm";
+
 import { db, users } from "@/db/mysql2";
 import { UserTokenJwtPayload } from "@/types";
 import { withAuth } from "@/lib/api";
@@ -11,14 +12,14 @@ export const GET = withAuth(async (req: NextRequest, session) => {
     const userJwt = jwt.verify(session.value, process.env.AUTH_SECRET) as UserTokenJwtPayload;
     const userId = userJwt.id;
 
-    const findUser = await db.query.users.findFirst({
+    const rows = await db.query.users.findFirst({
       where: eq(users.id, userId),
       columns: {
         password: false,
       },
     });
 
-    if (!findUser) {
+    if (!rows) {
       return NextResponse.json(
         {
           message: "User not found",
@@ -32,9 +33,7 @@ export const GET = withAuth(async (req: NextRequest, session) => {
       {
         message: "Successfully fetched user data",
         success: true,
-        data: {
-          user: findUser,
-        },
+        data: rows,
       },
       { status: 200 }
     );
