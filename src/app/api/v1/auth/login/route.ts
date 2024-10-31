@@ -40,6 +40,7 @@ export const POST = async (req: NextRequest) => {
       return NextResponse.json({ error: "Invalid Credentials" }, { status: 401 });
     }
 
+    const expiresIn = Number(process.env.AUTH_MAX_AGE) || 1 * 60 * 60 * 1000; // or 1 hour
     const jwtPayload: UserTokenJwtPayload = {
       id: user.id,
       full_name: user.full_name,
@@ -47,12 +48,12 @@ export const POST = async (req: NextRequest) => {
     };
 
     const accessToken = jwt.sign(jwtPayload, process.env.AUTH_SECRET, {
-      expiresIn: "1d",
+      expiresIn: String(expiresIn), // so it would be in milliseconds if passed as a string
     });
 
     const response = NextResponse.json(
       {
-        message: "Logged in successfully",
+        message: "Logged in successfully.",
         data: {
           access_token: String(accessToken),
         },
@@ -62,10 +63,9 @@ export const POST = async (req: NextRequest) => {
       }
     );
 
-    const expiresIn = Number(process.env.AUTH_MAX_AGE) || 24 * 60 * 60; // 24 hours
     response.cookies.set("session", String(accessToken), {
       httpOnly: true,
-      maxAge: expiresIn,
+      expires: new Date(Date.now() + expiresIn),
     });
 
     return response;
