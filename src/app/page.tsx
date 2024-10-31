@@ -1,6 +1,19 @@
 import Image from "next/image";
+// import { redirect } from "next/navigation";
 
-export default function Home() {
+import { db, users } from "@/db/mysql2";
+
+export default async function Home() {
+  const getUsers = async () => {
+    const data = await db.select().from(users);
+
+    return data;
+  };
+
+  const data = await getUsers();
+
+  // if (!session) return redirect("/api/auth/signin");
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
@@ -15,6 +28,20 @@ export default function Home() {
           </li>
           <li>Save and see your changes instantly.</li>
         </ol>
+
+        {data.length > 0
+          ? data.map((user) => (
+              <div key={user.id} className="flex gap-4 items-center">
+                <div className="w-10 h-10 bg-black/[.05] dark:bg-white/[.06] rounded-full flex items-center justify-center">
+                  {user.full_name[0]}
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold">{user.full_name}</h3>
+                  <p className="text-sm text-black/[.5] dark:text-white/[.5]">{user.username}</p>
+                </div>
+              </div>
+            ))
+          : null}
 
         <div className="flex gap-4 items-center flex-col sm:flex-row">
           <a
