@@ -1,4 +1,4 @@
-import { relations, sql } from "drizzle-orm";
+import { sql } from "drizzle-orm";
 import { mysqlTable, varchar, serial, timestamp, bigint } from "drizzle-orm/mysql-core";
 
 export const users = mysqlTable("users", {

@@ -5,6 +5,7 @@ import mysql from "mysql2/promise";
 import * as schema from "./schema";
 
 declare global {
+  /* eslint no-var: off */
   var _db:
     | (MySql2Database<typeof schema> & {
         $client: mysql.Pool;

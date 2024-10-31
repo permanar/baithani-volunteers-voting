@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { asc, eq, getTableColumns, min, sql } from "drizzle-orm";
+import { asc, eq, getTableColumns, sql } from "drizzle-orm";
 
 import { db, users, volunteerCategories, volunteers } from "@/db/mysql2";
 import { withAuth } from "@/lib/api";
