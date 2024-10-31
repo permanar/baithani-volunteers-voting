@@ -1,13 +1,17 @@
 import { NextResponse } from "next/server";
 
-export const POST = async () => {
+import { withAuth } from "@/lib/api";
+
+export const POST = withAuth(async () => {
   try {
-    const response = NextResponse.json({
-      status: 200,
-      json: {
+    const response = NextResponse.json(
+      {
         message: "Logged out successfully",
       },
-    });
+      {
+        status: 200,
+      }
+    );
 
     response.cookies.set("session", "", {
       httpOnly: true,
@@ -25,4 +29,4 @@ export const POST = async () => {
       { status: 500 }
     );
   }
-};
+});
