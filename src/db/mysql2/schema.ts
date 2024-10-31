@@ -1,4 +1,4 @@
-import { sql } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 import { mysqlTable, varchar, serial, timestamp, bigint } from "drizzle-orm/mysql-core";
 
 export const users = mysqlTable("users", {
@@ -57,7 +57,44 @@ export const voters = mysqlTable("voters", {
     .onUpdateNow(),
 });
 
+export const roles = mysqlTable("roles", {
+  id: serial("id").primaryKey(),
+
+  name: varchar("name", { length: 100 }).notNull(),
+  description: varchar("description", { length: 255 }),
+
+  created_at: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`),
+  updated_at: timestamp("updated_at")
+    .default(sql`CURRENT_TIMESTAMP`)
+    .onUpdateNow(),
+});
+
+export const userRoles = mysqlTable("user_roles", {
+  id: serial("id").primaryKey(),
+
+  user_id: bigint("user_id", { unsigned: true, mode: "bigint" })
+    .references(() => users.id, { onDelete: "cascade" })
+    .notNull(),
+  role_id: bigint("role_id", { unsigned: true, mode: "bigint" })
+    .references(() => roles.id, { onDelete: "cascade" })
+    .notNull(),
+
+  created_at: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`),
+  updated_at: timestamp("updated_at")
+    .default(sql`CURRENT_TIMESTAMP`)
+    .onUpdateNow(),
+});
+
 export type Users = typeof users.$inferSelect;
 export type VolunteerCategories = typeof volunteerCategories.$inferSelect;
 export type Volunteers = typeof volunteers.$inferSelect;
 export type Voters = typeof voters.$inferSelect;
+export type Roles = typeof roles.$inferSelect;
+export type UserRoles = typeof userRoles.$inferSelect;
+
+export type UsersInsert = typeof users.$inferInsert;
+export type VolunteerCategoriesInsert = typeof volunteerCategories.$inferInsert;
+export type VolunteersInsert = typeof volunteers.$inferInsert;
+export type VotersInsert = typeof voters.$inferInsert;
+export type RolesInsert = typeof roles.$inferInsert;
+export type UserRolesInsert = typeof userRoles.$inferInsert;
