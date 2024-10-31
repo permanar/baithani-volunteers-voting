@@ -1,0 +1,20 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1730223972635,
+      "tag": "0000_lean_nova",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1730224188132,
+      "tag": "0001_panoramic_randall_flagg",
+      "breakpoints": true
+    }
+  ]
+}
