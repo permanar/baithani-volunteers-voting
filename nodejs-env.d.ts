@@ -4,6 +4,7 @@ declare namespace NodeJS {
 
     // Authentication
     AUTH_SECRET: string;
+    AUTH_MAX_AGE: string;
 
     // Database
     DB_HOST: string;
