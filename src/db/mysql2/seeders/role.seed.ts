@@ -4,8 +4,8 @@ import { db } from "../mysql";
 import { roles, RolesInsert } from "../schema";
 
 export async function seedRoles() {
-  console.log(`🌱 Seeding: roles...`);
-  console.time("Seeding time");
+  console.log(`\n🌱 Seeding: roles...`);
+  console.time("⏱ Seeding Time");
 
   const allRoles: RolesInsert[] = [
     { name: "admin", description: "Admin role" },
@@ -25,5 +25,7 @@ export async function seedRoles() {
   }
 
   console.log(`✅ Seeding roles done: ${count} rows.`);
-  console.timeEnd("Seeding time");
+  console.timeEnd("⏱ Seeding Time");
+
+  console.log("────────────────────────────────────────\n");
 }

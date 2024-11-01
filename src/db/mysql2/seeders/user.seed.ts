@@ -13,8 +13,8 @@ type UserCsvType = {
 };
 
 export async function seedUsers() {
-  console.log(`🌱 Seeding: users...`);
-  console.time("Seeding time");
+  console.log(`\n🌱 Seeding: users...`);
+  console.time("⏱ Seeding Time");
 
   const data = await fs.readFile("./csv/pelayan-no-duplicate.csv", "utf-8");
   const usersCsv = Papa.parse<UserCsvType>(data, {
@@ -46,5 +46,7 @@ export async function seedUsers() {
   }
 
   console.log(`✅ Seeding users done: ${count} rows.`);
-  console.timeEnd("Seeding time");
+  console.timeEnd("⏱ Seeding Time");
+
+  console.log("────────────────────────────────────────");
 }

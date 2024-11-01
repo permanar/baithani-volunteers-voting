@@ -4,8 +4,8 @@ import { db } from "../mysql";
 import { roles, userRoles, users } from "../schema";
 
 export async function seedUserRoles() {
-  console.log(`🌱 Seeding: user roles...`);
-  console.time("Seeding time");
+  console.log(`\n🌱 Seeding: user roles...`);
+  console.time("⏱ Seeding Time");
 
   let count = 0;
   const usersTb = await db.select().from(users);
@@ -33,5 +33,7 @@ export async function seedUserRoles() {
   }
 
   console.log(`✅ Seeding user roles done: ${count} rows.`);
-  console.timeEnd("Seeding time");
+  console.timeEnd("⏱ Seeding Time");
+
+  console.log("────────────────────────────────────────");
 }
