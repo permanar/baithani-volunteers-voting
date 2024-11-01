@@ -1,5 +1,6 @@
+import { table } from "console";
 import { sql } from "drizzle-orm";
-import { mysqlTable, varchar, serial, timestamp, bigint } from "drizzle-orm/mysql-core";
+import { mysqlTable, varchar, serial, timestamp, bigint, unique } from "drizzle-orm/mysql-core";
 
 export const users = mysqlTable("users", {
   id: serial("id").primaryKey(),
@@ -25,21 +26,27 @@ export const volunteerCategories = mysqlTable("volunteer_categories", {
     .onUpdateNow(),
 });
 
-export const volunteers = mysqlTable("volunteers", {
-  id: serial("id").primaryKey(),
+export const volunteers = mysqlTable(
+  "volunteers",
+  {
+    id: serial("id").primaryKey(),
 
-  user_id: bigint("user_id", { unsigned: true, mode: "bigint" })
-    .references(() => users.id, { onDelete: "cascade" })
-    .notNull(),
-  volunteer_category_id: bigint("volunteer_category_id", { unsigned: true, mode: "bigint" })
-    .references(() => volunteerCategories.id, { onDelete: "cascade" })
-    .notNull(),
+    user_id: bigint("user_id", { unsigned: true, mode: "bigint" })
+      .references(() => users.id, { onDelete: "cascade" })
+      .notNull(),
+    volunteer_category_id: bigint("volunteer_category_id", { unsigned: true, mode: "bigint" })
+      .references(() => volunteerCategories.id, { onDelete: "cascade" })
+      .notNull(),
 
-  created_at: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`),
-  updated_at: timestamp("updated_at")
-    .default(sql`CURRENT_TIMESTAMP`)
-    .onUpdateNow(),
-});
+    created_at: timestamp("created_at").default(sql`CURRENT_TIMESTAMP`),
+    updated_at: timestamp("updated_at")
+      .default(sql`CURRENT_TIMESTAMP`)
+      .onUpdateNow(),
+  },
+  (t) => ({
+    unique: unique().on(t.user_id, t.volunteer_category_id),
+  })
+);
 
 export const voters = mysqlTable("voters", {
   id: serial("id").primaryKey(),
