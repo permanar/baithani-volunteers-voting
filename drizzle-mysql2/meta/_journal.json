@@ -1,0 +1,41 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1730223972635,
+      "tag": "0000_lean_nova",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1730224188132,
+      "tag": "0001_panoramic_randall_flagg",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1730394771062,
+      "tag": "0002_silly_mindworm",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1730457419607,
+      "tag": "0003_marvelous_peter_quill",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1730457515999,
+      "tag": "0004_rapid_gauntlet",
+      "breakpoints": true
+    }
+  ]
+}
