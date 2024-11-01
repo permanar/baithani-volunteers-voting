@@ -1,6 +1,9 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
+
+import { ApiClient } from "@/common/api";
 
 const LoginPage = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -25,6 +28,9 @@ const LoginPage = () => {
 
   return (
     <div>
+      <center>
+        <Link href="/">Home</Link>
+      </center>
       LoginPage
       <form onSubmit={handleSubmit}>
         <label>
@@ -38,6 +44,24 @@ const LoginPage = () => {
 
         <button type="submit">Submit</button>
       </form>
+      <button
+        onClick={async () => {
+          const data = ApiClient("/api/v1/auth/me");
+
+          console.log({ data });
+        }}
+      >
+        fetch me
+      </button>
+      <button
+        onClick={async () => {
+          await fetch("/api/v1/auth/logout", {
+            method: "POST",
+          });
+        }}
+      >
+        logout
+      </button>
     </div>
   );
 };
