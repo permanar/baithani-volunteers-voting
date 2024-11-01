@@ -1,0 +1,1 @@
+ALTER TABLE `volunteers` ADD CONSTRAINT `volunteers_user_id_volunteer_category_id_unique` UNIQUE(`user_id`,`volunteer_category_id`);

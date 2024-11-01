@@ -22,6 +22,20 @@
       "when": 1730394771062,
       "tag": "0002_silly_mindworm",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1730457419607,
+      "tag": "0003_marvelous_peter_quill",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1730457515999,
+      "tag": "0004_rapid_gauntlet",
+      "breakpoints": true
     }
   ]
 }
