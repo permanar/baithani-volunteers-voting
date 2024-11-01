@@ -7,6 +7,8 @@ import { ApiClient } from "@/common/api";
 import { VolunteerResponse } from "@/types";
 
 export default async function Home() {
+  const { isAuthenticated } = await checkSession();
+
   const getUsers = async () => {
     const data = await ApiClient<VolunteerResponse>("/api/v1/volunteers", {
       headers: {
@@ -17,8 +19,8 @@ export default async function Home() {
     return data;
   };
 
+  if (!isAuthenticated) return redirect("/login");
 
-  // if (!session) return redirect("/api/auth/signin");
   const { data } = await getUsers();
 
   return (
