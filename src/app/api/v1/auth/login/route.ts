@@ -14,7 +14,10 @@ export const POST = async (req: NextRequest) => {
 
     if (!username || !password) {
       return NextResponse.json(
-        { message: "Username and password are required." },
+        {
+          message: "Username and password are required.",
+          success: false,
+        },
         {
           status: 400,
         }
@@ -27,7 +30,10 @@ export const POST = async (req: NextRequest) => {
 
     if (!user) {
       return NextResponse.json(
-        { message: "User not found." },
+        {
+          message: "User not found.",
+          success: false,
+        },
         {
           status: 404,
         }
@@ -37,7 +43,13 @@ export const POST = async (req: NextRequest) => {
     const valid = await bcrypt.compare(password, user.password);
 
     if (!valid) {
-      return NextResponse.json({ error: "Invalid Credentials." }, { status: 401 });
+      return NextResponse.json(
+        {
+          error: "Invalid Credentials.",
+          success: false,
+        },
+        { status: 401 }
+      );
     }
 
     // if user still has an active session, throw an error and tell them they are already logged in
@@ -50,6 +62,7 @@ export const POST = async (req: NextRequest) => {
         return NextResponse.json(
           {
             message: "You are already logged in.",
+            success: false,
           },
           { status: 400 }
         );
@@ -73,6 +86,7 @@ export const POST = async (req: NextRequest) => {
     const response = NextResponse.json(
       {
         message: "Logged in successfully.",
+        success: true,
         data: {
           access_token: String(accessToken),
         },

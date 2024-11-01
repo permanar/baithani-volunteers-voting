@@ -1,0 +1,1 @@
+ALTER TABLE `voters` ADD CONSTRAINT `voters_user_id_unique` UNIQUE(`user_id`);

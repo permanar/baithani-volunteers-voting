@@ -21,6 +21,7 @@
   "dependencies": {
     "@auth/drizzle-adapter": "^1.7.2",
     "bcryptjs": "^2.4.3",
+    "clsx": "^2.1.1",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.35.3",
     "jsonwebtoken": "^9.0.2",
@@ -28,7 +29,8 @@
     "next": "15.0.1",
     "papaparse": "^5.4.1",
     "react": "19.0.0-rc-69d4b800-20241021",
-    "react-dom": "19.0.0-rc-69d4b800-20241021"
+    "react-dom": "19.0.0-rc-69d4b800-20241021",
+    "tailwind-merge": "^2.5.4"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
