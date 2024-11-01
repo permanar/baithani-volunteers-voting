@@ -53,6 +53,7 @@ export const voters = mysqlTable("voters", {
 
   user_id: bigint("user_id", { unsigned: true, mode: "bigint" })
     .references(() => users.id, { onDelete: "cascade" })
+    .unique()
     .notNull(),
   voted: bigint("voted", { unsigned: true, mode: "bigint" })
     .references(() => users.id, { onDelete: "cascade" })
