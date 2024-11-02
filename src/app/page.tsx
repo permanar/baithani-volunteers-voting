@@ -14,6 +14,10 @@ export default async function Home() {
       headers: {
         Cookie: (await cookies()).toString(),
       },
+      params: {
+        page: 1,
+        pageSize: 1000,
+      },
     });
 
     return data;
@@ -25,7 +29,7 @@ export default async function Home() {
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+      <main className="flex flex-col gap-8 row-start-2 items-start">
         <div className="flex items-center gap-5">
           <div className="w-16">
             <Image
@@ -49,7 +53,7 @@ export default async function Home() {
                 <div>
                   <h3 className="text-lg font-semibold">{user.full_name}</h3>
 
-                  <div className="flex gap-2">
+                  <div className="flex flex-wrap gap-2">
                     {user.volunteer_categories.map((category, idx) => (
                       <span
                         key={`${category.name}-${idx}`}
