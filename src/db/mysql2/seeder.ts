@@ -1,9 +1,11 @@
-import { seedUsers, seedRoles, seedUserRoles } from "./seeders";
+import { seedUsers, seedRoles, seedUserRoles, seedVolunteerCategories, seedVolunteers } from "./seeders";
 
 async function main() {
   await seedUsers();
   await seedRoles();
   await seedUserRoles();
+  await seedVolunteerCategories();
+  await seedVolunteers();
 }
 
 main()
