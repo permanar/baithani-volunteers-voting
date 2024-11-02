@@ -45,14 +45,13 @@ export const POST = async (req: NextRequest) => {
     if (!valid) {
       return NextResponse.json(
         {
-          error: "Invalid Credentials.",
+          message: "Invalid Credentials.",
           success: false,
         },
         { status: 401 }
       );
     }
 
-    // if user still has an active session, throw an error and tell them they are already logged in
     try {
       const session = req.cookies.get("session");
 
