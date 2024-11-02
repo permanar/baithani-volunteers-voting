@@ -1,1 +1,2 @@
-export * from "./IconMisc";
+export * from "./IconsEye";
+export * from "./IconsMisc";
