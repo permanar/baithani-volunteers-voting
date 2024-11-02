@@ -47,7 +47,7 @@ export const GET = withAuth(async (req: NextRequest) => {
           pagination: {
             page: Number(page),
             total_pages: Math.ceil(total / Number(pageSize)),
-            pageSize: Number(pageSize),
+            page_size: Number(pageSize),
             total,
           },
         },

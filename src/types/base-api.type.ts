@@ -9,7 +9,7 @@ export type PaginationMeta<T> = BaseAPIResponse<T[]> & {
     pagination: {
       page: number;
       total_pages: number;
-      pageSize: number;
+      page_size: number;
       total: number;
     };
   };
