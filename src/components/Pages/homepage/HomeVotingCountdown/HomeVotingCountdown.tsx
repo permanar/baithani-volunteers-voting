@@ -17,7 +17,7 @@ export const HomeVotingCountdown = (props: Props) => {
     <div className="relative flex flex-col gap-8 mt-16 px-6">
       <div className="flex flex-col items-start gap-1">
         <h2 className="text-xl lg:text-4xl font-semibold">Peluncuran Pemilihan Suara</h2>
-        <span className="text-2xs lg:text-lg font-medium text-black/25">
+        <span className="text-2xs lg:text-lg font-medium text-black/65">
           Nantikan peluncuran pemilihan suara dan berikan suaramu
         </span>
       </div>
