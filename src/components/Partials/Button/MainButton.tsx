@@ -23,6 +23,7 @@ export const buttonVariants = cva(
       variant: {
         primary:
           "text-white bg-purple hover:bg-purple/70 active:bg-purple/80 focus:ring-purple/50 focus:ring-opacity-50",
+        text: "text-purple underline hover:text-purple/70 active:text-purple/80",
 
         // outlined
         primaryOutlined:

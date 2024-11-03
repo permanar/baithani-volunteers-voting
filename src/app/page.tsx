@@ -5,6 +5,7 @@ import { checkSession } from "@/lib/auth";
 import { ApiClient } from "@/common/api";
 import { VolunteerResponse } from "@/types";
 import { HeaderBar } from "@/components/Views/HeaderBar";
+import { Footer } from "@/components/Views/Footer";
 import { HomeHeroSection, HomeVoterSection, HomeVotingCountdown } from "@/components/Pages/homepage";
 
 export default async function Home() {
@@ -17,7 +18,7 @@ export default async function Home() {
       },
       params: {
         page: 1,
-        pageSize: 1000,
+        pageSize: 10,
       },
     });
 
@@ -31,9 +32,12 @@ export default async function Home() {
   return (
     <div className="relative p-0.5">
       <HeaderBar />
+
       <HomeHeroSection />
       <HomeVotingCountdown />
       <HomeVoterSection data={users} />
+
+      <Footer />
     </div>
   );
 }
