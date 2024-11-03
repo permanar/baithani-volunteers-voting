@@ -11,7 +11,7 @@ const LoginPage = async () => {
   if (isAuthenticated) return redirect("/");
 
   return (
-    <div className="flex flex-col justify-center px-8 pt-20 pb-10 max-w-[550px] min-h-[100vh] mx-auto">
+    <div className="flex flex-col justify-center px-8 py-5 max-w-[550px] min-h-[100vh] mx-auto">
       <div className="flex flex-col items-center gap-1 text-center mb-10">
         <div className="flex items-center gap-5 mb-7">
           <div className="w-14">
