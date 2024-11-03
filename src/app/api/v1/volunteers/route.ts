@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { asc, eq, getTableColumns, sql } from "drizzle-orm";
 
-import { db, users, volunteerCategories, volunteers } from "@/db/mysql2";
+import { db, users, VolunteerCategories, volunteerCategories, volunteers } from "@/db/mysql2";
 import { withAuth } from "@/lib/api";
 import { withPagination, queryWithCount } from "@/lib/pagination";
 
@@ -18,7 +18,7 @@ export const GET = withAuth(async (req: NextRequest) => {
     const qb = db
       .select({
         ...userColumns,
-        volunteer_categories: sql`JSON_ARRAYAGG(
+        volunteer_categories: sql<Pick<VolunteerCategories, "name">[]>`JSON_ARRAYAGG(
           JSON_OBJECT(
             'name', ${volunteerCategories.name}
           )

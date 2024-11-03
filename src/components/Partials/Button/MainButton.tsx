@@ -14,7 +14,7 @@ import { LoadingSpinner } from "../LoadingSpinner";
 
 export const buttonVariants = cva(
   [
-    "flex items-center justify-center min-w-[65px] px-4 py-2.5 rounded-4xl focus:outline-none focus:ring-2 font-semibold",
+    "flex items-center justify-center min-w-[65px] px-4 py-2.5 rounded-4xl focus:outline-none focus:ring-2 text-2xs lg:text-base font-semibold",
     "transition-colors duration-300 ease-in-out",
     "disabled:bg-[#e2e2e3] dark:disabled:bg-black-350 disabled:text-white disabled:cursor-not-allowed",
   ],

@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { eq } from "drizzle-orm";
+import { eq, getTableColumns, sql } from "drizzle-orm";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-import { db, users } from "@/db/mysql2";
+import { db, Roles, roles, userRoles, users } from "@/db/mysql2";
 import { UserTokenJwtPayload } from "@/types";
 
 export const POST = async (req: NextRequest) => {
@@ -24,9 +24,24 @@ export const POST = async (req: NextRequest) => {
       );
     }
 
-    const user = await db.query.users.findFirst({
-      where: eq(users.username, username),
-    });
+    // it intentionally assigned inside an array to get the first element
+    const [user] = await db
+      .select({
+        ...getTableColumns(users),
+        roles: sql<Pick<Roles, "id" | "name" | "description">[]>`JSON_ARRAYAGG(
+          JSON_OBJECT(
+            'id', ${roles.id},
+            'name', ${roles.name},
+            'description', ${roles.description}
+          )
+        )`,
+      })
+      .from(users)
+      .where(eq(users.username, username))
+      .leftJoin(userRoles, eq(userRoles.user_id, users.id))
+      .leftJoin(roles, eq(roles.id, userRoles.role_id))
+      .groupBy(users.id)
+      .execute();
 
     if (!user) {
       return NextResponse.json(
@@ -45,7 +60,7 @@ export const POST = async (req: NextRequest) => {
     if (!valid) {
       return NextResponse.json(
         {
-          message: "Invalid Credentials.",
+          message: "Invalid password.",
           success: false,
         },
         { status: 401 }
@@ -71,11 +86,12 @@ export const POST = async (req: NextRequest) => {
       // do nothing
     }
 
-    const expiresIn = Number(process.env.AUTH_MAX_AGE) || 1 * 60 * 60 * 1000; // or 1 hour
+    const expiresIn = Number(process.env.AUTH_MAX_AGE) || Number(1 * 60 * 60 * 1000); // or 1 hour
     const jwtPayload: UserTokenJwtPayload = {
       id: user.id,
       full_name: user.full_name,
       username: user.username,
+      role: user.roles.map((role) => role.name).join(","),
     };
 
     const accessToken = jwt.sign(jwtPayload, process.env.AUTH_SECRET, {
