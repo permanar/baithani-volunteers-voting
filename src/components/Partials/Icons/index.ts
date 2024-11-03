@@ -4,4 +4,5 @@ export * from "./IconsEye";
 export * from "./IconsMenu";
 export * from "./IconsMisc";
 export * from "./IconsSearch";
+export * from "./IconsSocialMedia";
 export * from "./IconsStar";
