@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import { Toaster } from "react-hot-toast";
+
 import { cn } from "@/common/styles";
 import { mergeFontsVariable } from "@/common/utils";
 import { IconBgStar, IconBgStar2 } from "@/components/Partials/Icons";
@@ -28,7 +30,17 @@ export default function RootLayout({
             <IconBgStar2 svg={{ className: "w-full h-full" }} />
           </div>
 
-          <main>{children}</main>
+          <main>
+            <Toaster
+              position="top-right"
+              toastOptions={{
+                duration: 3000,
+                className: "text-sm",
+              }}
+            />
+
+            {children}
+          </main>
         </body>
       </AppProviders>
     </html>

@@ -11,6 +11,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 import { cn } from "@/common/styles";
 import { ApiClient } from "@/common/api";
@@ -46,8 +47,13 @@ export const LoginForm = (props: Props) => {
     },
     onSuccess: (data) => {
       if (data.success) {
+        toast.success("Berhasil masuk! Menuju halaman utama...");
+
         router.push("/");
       }
+    },
+    onError: () => {
+      toast.error("Gagal masuk! Silakan coba lagi.");
     },
   });
 
