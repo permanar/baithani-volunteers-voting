@@ -34,7 +34,7 @@ export default function RootLayout({
 
           <main>
             <Toaster
-              position="top-right"
+              position="bottom-right"
               toastOptions={{
                 duration: 3000,
                 className: "text-sm",
