@@ -2,7 +2,7 @@ import React from "react";
 import { redirect } from "next/navigation";
 import Image from "next/image";
 
-import { LoginForm } from "@/components/Pages/login/LoginForm";
+import { LoginForm } from "@/components/Pages/login";
 import { checkSession } from "@/lib/auth";
 
 const LoginPage = async () => {
