@@ -83,3 +83,28 @@ export const IconBgStar2 = (props: Props) => {
     </svg>
   );
 };
+
+export const IconBgGradient = (props: Props) => {
+  return (
+    <svg width="375" height="1099" viewBox="0 0 375 1099" fill="none" xmlns="http://www.w3.org/2000/svg" {...props.svg}>
+      <g filter="url(#filter0_f_74_187)">
+        <circle cx="-0.5" cy="599.5" r="199.5" fill="#CC7EAC" fillOpacity="0.2" />
+      </g>
+      <defs>
+        <filter
+          id="filter0_f_74_187"
+          x="-600"
+          y="0"
+          width="1199"
+          height="1199"
+          filterUnits="userSpaceOnUse"
+          colorInterpolationFilters="sRGB"
+        >
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
+          <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+          <feGaussianBlur stdDeviation="200" result="effect1_foregroundBlur_74_187" />
+        </filter>
+      </defs>
+    </svg>
+  );
+};

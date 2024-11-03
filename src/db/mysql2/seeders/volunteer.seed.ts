@@ -1,9 +1,9 @@
 import Papa from "papaparse";
 import { promises as fs } from "fs";
-import { and, eq, sql } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 
 import { db } from "../mysql";
-import { roles, userRoles, users, volunteerCategories, volunteers } from "../schema";
+import { users, volunteerCategories, volunteers } from "../schema";
 
 type VolunteerCsvType = {
   category: string;

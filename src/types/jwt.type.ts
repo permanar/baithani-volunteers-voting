@@ -4,4 +4,5 @@ export type UserTokenJwtPayload<T = JwtPayload> = {
   id: number;
   full_name: string;
   username: string;
+  role: string;
 } & T;

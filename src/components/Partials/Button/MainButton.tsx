@@ -14,7 +14,7 @@ import { LoadingSpinner } from "../LoadingSpinner";
 
 export const buttonVariants = cva(
   [
-    "flex items-center justify-center min-w-[65px] px-4 py-2.5 rounded-4xl focus:outline-none focus:ring-2 font-semibold",
+    "flex items-center justify-center min-w-[65px] px-4 py-2.5 rounded-4xl focus:outline-none focus:ring-2 text-2xs lg:text-base font-semibold",
     "transition-colors duration-300 ease-in-out",
     "disabled:bg-[#e2e2e3] dark:disabled:bg-black-350 disabled:text-white disabled:cursor-not-allowed",
   ],
@@ -23,6 +23,7 @@ export const buttonVariants = cva(
       variant: {
         primary:
           "text-white bg-purple hover:bg-purple/70 active:bg-purple/80 focus:ring-purple/50 focus:ring-opacity-50",
+        text: "text-purple underline hover:text-purple/70 active:text-purple/80",
 
         // outlined
         primaryOutlined:

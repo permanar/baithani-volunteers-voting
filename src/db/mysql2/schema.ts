@@ -1,4 +1,3 @@
-import { table } from "console";
 import { sql } from "drizzle-orm";
 import { mysqlTable, varchar, serial, timestamp, bigint, unique } from "drizzle-orm/mysql-core";
 
