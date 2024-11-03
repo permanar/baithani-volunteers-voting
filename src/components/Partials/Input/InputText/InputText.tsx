@@ -12,7 +12,7 @@ import { Input } from "@headlessui/react";
 
 type Props = {
   label?: string;
-  prefix?: string;
+  prefix?: JSX.Element | string;
   suffix?: JSX.Element | string;
 
   labelClassName?: string;
