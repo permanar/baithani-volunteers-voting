@@ -19,7 +19,7 @@ export const Footer = (props: Props) => {
   const {} = props;
 
   return (
-    <div className="relative flex flex-col gap-2.5 mt-16 px-6 pb-5">
+    <div className="relative flex flex-col gap-2.5 mt-16 px-6 pb-8">
       <MainDivider className="mb-2" />
 
       <span className="text-xs font-semibold">© 2024 GPT Baithani. All Rights Reserved.</span>
@@ -38,9 +38,9 @@ export const Footer = (props: Props) => {
 
       <div className="ml-auto">
         <span className="text-2xs">
-          Made with <span className="text-red-500">❤</span> by
-          <Link href="https://www.instagram.com/multimediabaithani" target="_blank" className="text-blue-500">
-            Multimedia Baithani
+          Made with <span className="text-red-500">❤</span> by{" "}
+          <Link href="https://www.instagram.com/multimediabaithani" target="_blank" className="underline">
+            Multimedia Baithani.
           </Link>
         </span>
       </div>
