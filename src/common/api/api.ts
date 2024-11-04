@@ -1,10 +1,13 @@
 const baseURL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5050/api/v1";
 
-type ApiClientOptions = RequestInit & {
-  params?: Record<string, string | number | boolean | undefined | null>;
+type ApiClientOptions<TParams> = RequestInit & {
+  params?: TParams;
 };
 
-const ApiClient = async <T>(url: string, options?: ApiClientOptions) => {
+const ApiClient = async <T, TParams = Record<string, string | number | boolean | undefined | null>>(
+  url: string,
+  options?: ApiClientOptions<TParams>
+) => {
   const fullURL = new URL(url, baseURL);
 
   // if there are query parameters, append them to the URL

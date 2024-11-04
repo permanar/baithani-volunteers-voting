@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { asc, eq, getTableColumns, like, sql } from "drizzle-orm";
+import { and, asc, eq, getTableColumns, like, or, sql } from "drizzle-orm";
 
 import { db, users, VolunteerCategories, volunteerCategories, volunteers } from "@/db/mysql2";
 import { withAuth } from "@/lib/api";
@@ -11,6 +11,7 @@ export const GET = withAuth(async (req: NextRequest) => {
     const searchParams = req.nextUrl.searchParams;
 
     const search = searchParams.get("search") || "";
+    const categoryId = searchParams.get("category_id") || "";
     const page = searchParams.get("page") || "1";
     const pageSize = searchParams.get("pageSize") || "10";
 
@@ -28,9 +29,14 @@ export const GET = withAuth(async (req: NextRequest) => {
       .from(volunteers)
       .innerJoin(users, eq(users.id, volunteers.user_id))
       .innerJoin(volunteerCategories, eq(volunteerCategories.id, volunteers.volunteer_category_id))
-      .where(search ? like(users.full_name, `%${search}%`) : undefined)
+      .where(
+        and(
+          search ? like(users.full_name, `%${search}%`) : undefined,
+          categoryId ? eq(volunteers.volunteer_category_id, BigInt(categoryId)) : undefined
+        )
+      )
       .groupBy(users.id)
-      .orderBy(asc(users.id))
+      .orderBy(asc(users.full_name))
       .$dynamic();
 
     const findVolunteers = withPagination(qb, {
