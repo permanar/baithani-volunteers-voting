@@ -14,3 +14,10 @@ export type PaginationMeta<T> = BaseAPIResponse<T[]> & {
     };
   };
 };
+
+export type PaginationParams = {
+  search?: string;
+  page?: number;
+  page_size?: number;
+  category_id?: number;
+};

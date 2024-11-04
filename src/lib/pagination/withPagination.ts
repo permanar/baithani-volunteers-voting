@@ -1,4 +1,5 @@
-import { count, DrizzleError } from "drizzle-orm";
+import { users, volunteers } from "@/db/mysql2";
+import { count, countDistinct, DrizzleError, eq, sql } from "drizzle-orm";
 import { MySqlSelect } from "drizzle-orm/mysql-core";
 
 type PaginationOption = {
@@ -31,9 +32,29 @@ export const queryWithCount = async <T extends MySqlSelect>(qb: T): Promise<[Awa
   const result = await qb;
 
   // @ts-expect-error hack to override internals (not the ideal way)
-  qb.config.fields = { count: count() };
+  qb.config.fields = { count: countDistinct(users.id) };
+
   // @ts-expect-error set orderBy to empty array
   qb.config.orderBy = [];
+
+  // @ts-expect-error set orderBy to empty array
+  qb.config.groupBy = [];
+
+  // @ts-expect-error set joins to users so we can count the total
+  qb.config.joins = [
+    {
+      joinType: "left",
+      table: users,
+      on: eq(users.id, volunteers.user_id),
+      alias: "users",
+    },
+  ];
+
+  // @ts-expect-error set limit to undefined
+  qb.config.limit = undefined;
+
+  // @ts-expect-error set offset to undefined
+  qb.config.offset = undefined;
 
   const [total] = await qb;
 
