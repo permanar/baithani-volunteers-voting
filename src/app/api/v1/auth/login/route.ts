@@ -123,6 +123,7 @@ export const POST = async (req: NextRequest) => {
     return NextResponse.json(
       {
         message: err.message,
+        success: false,
       },
       { status: 500 }
     );
