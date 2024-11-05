@@ -1,3 +1,5 @@
+import toast from "react-hot-toast";
+
 const baseURL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5050/api/v1";
 
 type ApiClientOptions<TParams> = RequestInit & {
@@ -32,6 +34,14 @@ const ApiClient = async <T, TParams = Record<string, string | number | boolean |
   const data = await response.json();
 
   if (!response.ok) {
+    if (response.status === 401) {
+      toast.error("Sesi anda telah habis 😢. Silakan login kembali untuk melanjutkan.");
+
+      setTimeout(() => {
+        window.location.href = "/login";
+      }, 2500);
+    }
+
     throw new Error(data.message);
   }
 
