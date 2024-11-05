@@ -175,7 +175,8 @@ export const HomeVoterSection = (props: Props) => {
       {!hasNextPage && volunteers && volunteers.length === 0 && (
         <div className="flex items-center justify-center max-h-52 mx-auto">
           <span className="text-center text-black/65">
-            Oops! Tidak ada data dengan nama <span className="font-semibold">"{search}"</span> yang ditemukan 😿
+            Oops! Tidak ada data dengan nama <span className="font-semibold">&quot;{search}&quot;</span> yang ditemukan
+            😿
           </span>
         </div>
       )}
