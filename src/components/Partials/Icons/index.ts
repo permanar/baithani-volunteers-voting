@@ -1,5 +1,6 @@
 export * from "./IconsAccount";
 export * from "./IconsArrow";
+export * from "./IconsClose";
 export * from "./IconsEye";
 export * from "./IconsMenu";
 export * from "./IconsMisc";
