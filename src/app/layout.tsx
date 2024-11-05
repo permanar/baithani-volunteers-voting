@@ -23,7 +23,10 @@ export default function RootLayout({
     <html lang="en">
       <AppProviders>
         <body
-          className={cn(...mergeFontsVariable, "relative min-h-[100vh] text-sm font-urbanist antialiased bg-white")}
+          className={cn(
+            ...mergeFontsVariable,
+            "relative min-h-[100vh] text-sm font-urbanist scroll-smooth antialiased bg-white"
+          )}
         >
           <div className="absolute top-[40vh] md:top-64 bottom-auto -left-52 md:-left-80 w-[468px] h-[468px] md:w-[638px] md:h-[638px] -z-10">
             <IconBgStar svg={{ className: "w-full h-full" }} />
