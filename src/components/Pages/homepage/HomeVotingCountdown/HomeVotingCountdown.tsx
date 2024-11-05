@@ -13,6 +13,8 @@ import { intervalToDuration } from "date-fns";
 
 import { MainButton } from "@/components/Partials/Button";
 import { VOTING } from "@/common/constants";
+import { Description, Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
+import { IconCloseCross } from "@/components/Partials/Icons";
 
 type Props = {};
 
@@ -24,6 +26,7 @@ export const HomeVotingCountdown = (props: Props) => {
     minutes: 0,
     seconds: 0,
   });
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const getTimeLeft = (endDate: string) => {
@@ -94,8 +97,112 @@ export const HomeVotingCountdown = (props: Props) => {
       </div>
 
       <div className="flex items-center justify-center gap-4">
-        <MainButton>Lihat Hasil Pemilihan</MainButton>
+        <MainButton
+          onClick={() => {
+            setIsOpen(true);
+          }}
+        >
+          Lihat Hasil Pemilihan
+        </MainButton>
       </div>
+
+      <Dialog
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        transition
+        className="fixed inset-0 flex w-screen items-center justify-center p-4 transition duration-200 ease-out data-[closed]:opacity-0 bg-black/30"
+      >
+        <DialogPanel className="w-full max-w-lg space-y-4 px-5 py-4 rounded bg-white">
+          <div className="flex items-center justify-between gap-2.5">
+            <DialogTitle className="font-bold max-w-56">
+              <span className="text-xl font-bold text-purple">Pemenang</span>{" "}
+              <span className="text-xl font-bold">Dengan</span> <span className="text-xl font-bold">Suara</span>{" "}
+              <span className="text-xl font-bold text-purple">Terbanyak</span>
+            </DialogTitle>
+
+            <button
+              className="w-4 h-4"
+              onClick={() => {
+                setIsOpen(false);
+              }}
+            >
+              <IconCloseCross svg={{ className: "w-full h-full" }} />
+            </button>
+          </div>
+
+          <div className="flex flex-col gap-4">
+            <div className="w-full max-w-md mx-auto">
+              <div className="flex justify-between p-2.5 font-semibold text-gray-700">
+                <span className="w-1/6">No</span>
+                <span className="w-2/6">Nama</span>
+                <span className="text-right w-3/6">Perhitungan Suara</span>
+              </div>
+
+              <div className="flex items-center justify-between gap-1 w-full rounded p-2.5 mb-2.5 border border-black/25 bg-white">
+                <div className="w-1/6">
+                  <div className="flex items-center justify-center w-4 h-4 text-2xs font-semibold rounded-full bg-gray-300">
+                    1
+                  </div>
+                </div>
+                <div className="w-3/6 text-2xs whitespace-nowrap overflow-hidden text-ellipsis">Tyas Mardyasmara</div>
+                <div className="text-right w-2/6">
+                  <div className="flex items-center justify-end gap-1">
+                    <div className="flex items-center justify-center w-4 h-4 text-2xs font-semibold rounded-full bg-gray-300">
+                      R
+                    </div>
+                    <div className="flex items-center justify-center w-4 h-4 text-2xs font-semibold rounded-full bg-gray-300">
+                      A
+                    </div>
+                    <div className="flex items-center justify-center w-4 h-4 text-2xs font-semibold rounded-full bg-gray-300">
+                      Z
+                    </div>
+                    <div className="flex items-center justify-center w-4 h-4 text-2xs font-semibold rounded-full bg-gray-300">
+                      Z
+                    </div>
+                    <div className="flex items-center justify-center w-4 h-4 text-2xs font-semibold rounded-full bg-gray-300">
+                      Z
+                    </div>
+                    <div className="flex items-center justify-center w-4 h-4 text-2xs font-semibold rounded-full bg-gray-300">
+                      9+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between gap-1 w-full rounded p-2.5 mb-2.5 border border-black/25 bg-white">
+                <div className="w-1/6">
+                  <div className="flex items-center justify-center w-4 h-4 text-2xs font-semibold rounded-full bg-gray-300">
+                    2
+                  </div>
+                </div>
+                <div className="w-3/6 text-2xs whitespace-nowrap overflow-hidden text-ellipsis">Koko Pratama Pudja</div>
+                <div className="text-right w-2/6">
+                  <div className="flex items-center justify-end gap-1">
+                    <div className="flex items-center justify-center w-4 h-4 text-2xs font-semibold rounded-full bg-gray-300">
+                      L
+                    </div>
+                    <div className="flex items-center justify-center w-4 h-4 text-2xs font-semibold rounded-full bg-gray-300">
+                      N
+                    </div>
+                    <div className="flex items-center justify-center w-4 h-4 text-2xs font-semibold rounded-full bg-gray-300">
+                      B
+                    </div>
+                    <div className="flex items-center justify-center w-4 h-4 text-2xs font-semibold rounded-full bg-gray-300">
+                      C
+                    </div>
+                    <div className="flex items-center justify-center w-4 h-4 text-2xs font-semibold rounded-full bg-gray-300">
+                      T
+                    </div>
+                    <div className="flex items-center justify-center w-4 h-4 text-2xs font-semibold rounded-full bg-gray-300">
+                      29+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </DialogPanel>
+      </Dialog>
     </div>
   );
 };
