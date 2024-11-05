@@ -22,7 +22,7 @@ export const LoadingSpinner: FC<Props> = (props) => {
   const { className: iconClassName, ...iconPropsRest } = iconProps;
 
   return (
-    <div className={cn("flex items-center justify-center", parentClassName)} {...oarentPropsRest}>
+    <div className={cn("flex items-center justify-center text-purple", parentClassName)} {...oarentPropsRest}>
       <IconCircularProgress
         svg={{
           className: iconClassName,

@@ -71,7 +71,8 @@ export const GET = withAuth(async (req: NextRequest) => {
 
     return NextResponse.json(
       {
-        error: err.message,
+        message: err.message,
+        success: false,
       },
       {
         status: 500,
