@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 
 import { checkSession } from "@/lib/auth";
 import { ApiClient } from "@/common/api";
-import { PaginationParams, VolunteerResponse } from "@/types";
+import { PaginationParams, VolunteerCategoryResponse, VolunteerResponse } from "@/types";
 import { HeaderBar } from "@/components/Views/HeaderBar";
 import { Footer } from "@/components/Views/Footer";
 import { HomeHeroSection, HomeVoterSection, HomeVotingCountdown } from "@/components/Pages/homepage";
@@ -11,7 +11,9 @@ import { HomeHeroSection, HomeVoterSection, HomeVotingCountdown } from "@/compon
 export default async function Home() {
   const { isAuthenticated } = await checkSession();
 
-  const getUsers = async () => {
+  if (!isAuthenticated) return redirect("/login");
+
+  const getVolunteers = async () => {
     const data = await ApiClient<VolunteerResponse, PaginationParams>("/api/v1/volunteers", {
       headers: {
         Cookie: (await cookies()).toString(),
@@ -25,9 +27,18 @@ export default async function Home() {
     return data;
   };
 
-  if (!isAuthenticated) return redirect("/login");
+  const getVolunteerCategories = async () => {
+    const data = await ApiClient<VolunteerCategoryResponse>("/api/v1/volunteer-categories", {
+      headers: {
+        Cookie: (await cookies()).toString(),
+      },
+    });
 
-  const users = await getUsers();
+    return data;
+  };
+
+  const users = await getVolunteers();
+  const volunteerCategories = await getVolunteerCategories();
 
   return (
     <div className="relative p-0.5">
@@ -35,7 +46,7 @@ export default async function Home() {
 
       <HomeHeroSection />
       <HomeVotingCountdown />
-      <HomeVoterSection data={users} />
+      <HomeVoterSection volunteers={users} volunteerCategories={volunteerCategories} />
 
       <Footer />
     </div>
