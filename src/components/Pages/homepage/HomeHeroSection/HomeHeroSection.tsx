@@ -5,6 +5,8 @@
  * @author Richie Permana <richie.permana@gmail.com>
  */
 
+"use client";
+
 import { MainButton } from "@/components/Partials/Button";
 import { IconArrow, IconChart, IconStar } from "@/components/Partials/Icons";
 import React from "react";
@@ -46,7 +48,16 @@ export const HomeHeroSection = (props: Props) => {
       </div>
 
       <div className="mt-2.5">
-        <MainButton className="gap-2 px-5 py-2 text-2xs lg:text-base">
+        <MainButton
+          className="gap-2 px-5 py-2 text-2xs lg:text-base"
+          onClick={() => {
+            const homeVoterSection = document.getElementById("home-voter-section");
+
+            if (homeVoterSection) {
+              window.scrollTo({ top: homeVoterSection.offsetTop - 24, behavior: "smooth" });
+            }
+          }}
+        >
           Pilih Sekarang <IconArrow />
         </MainButton>
       </div>

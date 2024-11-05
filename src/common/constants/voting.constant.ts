@@ -1,0 +1,4 @@
+export const VOTING = {
+  START_DATE: "2024-11-15T19:00:00+08:00",
+  END_DATE: "2024-11-15T20:30:00+08:00",
+};

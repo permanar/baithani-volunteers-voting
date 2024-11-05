@@ -18,9 +18,12 @@ export const VoteCard = (props: Props) => {
   const { data } = props;
 
   return (
-    <div className="flex items-center justify-between gap-1.5 w-full rounded p-2.5 border border-purple/25">
+    <div className="flex items-center justify-between gap-4 w-full rounded p-2.5 border border-purple/25">
       <div className="flex flex-col gap-1.5 overflow-hidden">
-        <span className="text-sm font-semibold whitespace-nowrap overflow-hidden text-ellipsis" title={data.full_name}>
+        <span
+          className="capitalize text-sm font-semibold whitespace-nowrap overflow-hidden text-ellipsis"
+          title={data.full_name}
+        >
           {data.full_name}
         </span>
 

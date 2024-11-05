@@ -1,4 +1,4 @@
-import { PaginationMeta } from "./base-api.type";
+import { BaseAPIResponse, PaginationMeta } from "./base-api.type";
 
 export type Volunteer = {
   id: number;
@@ -9,4 +9,12 @@ export type Volunteer = {
   }[];
 };
 
+export type VolunteerCategory = {
+  id: number;
+  name: string;
+  created_at: string;
+  updated_at: string;
+};
+
 export type VolunteerResponse = PaginationMeta<Volunteer>;
+export type VolunteerCategoryResponse = BaseAPIResponse<VolunteerCategory[]>;

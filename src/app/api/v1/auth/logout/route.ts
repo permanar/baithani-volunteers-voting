@@ -24,7 +24,8 @@ export const POST = withAuth(async () => {
 
     return NextResponse.json(
       {
-        error: err.message,
+        message: err.message,
+        success: false,
       },
       { status: 500 }
     );
