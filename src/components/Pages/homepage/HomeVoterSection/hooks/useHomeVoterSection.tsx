@@ -41,8 +41,12 @@ export const useHomeVoterSection = (props: Props) => {
 
     isFetchingNextPage,
     isFetching,
-    isError,
     isLoading,
+    isPending,
+    isError,
+    isLoadingError,
+    isRefetchError,
+    isFetchNextPageError,
   } = useInfiniteQuery({
     initialPageParam: 1,
     initialData: {
@@ -110,8 +114,12 @@ export const useHomeVoterSection = (props: Props) => {
     hasNextPage,
     isFetchingNextPage,
     isFetching,
-    isError,
     isLoading,
+    isPending,
+    isError,
+    isLoadingError,
+    isRefetchError,
+    isFetchNextPageError,
 
     setSearch,
     setVolunteerCategory,

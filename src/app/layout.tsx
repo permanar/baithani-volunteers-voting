@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 
 import { Toaster } from "react-hot-toast";
 
@@ -14,14 +15,21 @@ export const metadata: Metadata = {
   description: "Voting app for the volunteers of GPT Baithani.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const isAuthenticated = cookieStore.has("session");
+
+  const appProvidersProps = {
+    isAuthenticated,
+  };
+
   return (
     <html lang="en">
-      <AppProviders>
+      <AppProviders {...appProvidersProps}>
         <body
           className={cn(
             ...mergeFontsVariable,
@@ -35,7 +43,7 @@ export default function RootLayout({
             <IconBgStar2 svg={{ className: "w-full h-full" }} />
           </div>
 
-          <main>
+          <main className="overflow-hidden">
             <Toaster
               position="bottom-right"
               toastOptions={{

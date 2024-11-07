@@ -10,13 +10,16 @@
 import React, { useEffect, useState } from "react";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { AuthProvider } from "../AuthContext";
 
 type Props = {
   children: React.ReactNode;
+
+  isAuthenticated: boolean;
 };
 
 export const AppProviders = (props: Props) => {
-  const { children } = props;
+  const { children, isAuthenticated } = props;
 
   const [queryClient] = useState(() => new QueryClient());
 
@@ -49,5 +52,9 @@ export const AppProviders = (props: Props) => {
     }
   }, []);
 
-  return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider isAuthenticated={isAuthenticated}>{children}</AuthProvider>
+    </QueryClientProvider>
+  );
 };
