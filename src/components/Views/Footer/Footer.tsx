@@ -19,7 +19,7 @@ export const Footer = (props: Props) => {
   const {} = props;
 
   return (
-    <div className="relative flex flex-col gap-2.5 mt-16 px-6 pb-8">
+    <footer className="relative flex flex-col gap-2.5 mt-16 px-6 pb-8">
       <MainDivider className="mb-2" />
 
       <span className="text-xs font-semibold">© 2024 GPT Baithani. All Rights Reserved.</span>
@@ -44,6 +44,6 @@ export const Footer = (props: Props) => {
           </Link>
         </span>
       </div>
-    </div>
+    </footer>
   );
 };

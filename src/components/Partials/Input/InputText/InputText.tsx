@@ -64,7 +64,7 @@ export const InputText = (props: Props) => {
         <Input
           type={type}
           className={cn(
-            "block w-full py-1.5 px-3 text-xs/6",
+            "block w-full py-1.5 px-3 text-sm",
             "text-black dark:text-white bg-transparent",
             "focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25",
             "placeholder-gray-300 dark:placeholder-gray-500",

@@ -7,7 +7,7 @@
 
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 
@@ -19,6 +19,7 @@ import { LoadingSpinner } from "@/components/Partials/LoadingSpinner";
 import { useHomeVoterSection } from "./hooks";
 import { cn } from "@/common/styles";
 import { MainButton } from "@/components/Partials/Button";
+import { ModalVote } from "@/components/Views/Modal";
 
 type Props = {
   volunteers: VolunteerResponse;
@@ -36,8 +37,10 @@ export const HomeVoterSection = (props: Props) => {
     volunteers,
 
     hasNextPage,
+    isFetching,
     isFetchingNextPage,
     isError,
+    isRefetchError,
 
     setSearch,
     setVolunteerCategory,
@@ -110,23 +113,22 @@ export const HomeVoterSection = (props: Props) => {
         <div className="w-full">
           <InputText
             autoComplete="off"
-            className="text-2xs"
             placeholder="Pencarian"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             // @ts-expect-error weird
             prefix={
               <div className="flex items-center justify-center gap-1.5">
-                <div className="shrink-0">
-                  <IconSearch />
+                <div className="shrink-0 w-3.5 h-3.5">
+                  <IconSearch svg={{ className: "w-full h-full" }} />
                 </div>
 
                 {volunteerCategory.id !== 0 && (
-                  <span className="flex items-center justify-center gap-1 shrink-0 rounded-full text-3xs leading-none font-medium px-2.5 py-1 bg-purple/10 text-purple">
+                  <span className="flex items-center justify-center gap-1 shrink-0 rounded-full text-xs leading-none font-medium px-2.5 py-1 bg-purple/10 text-purple">
                     {volunteerCategory.name}
 
-                    <button className="shrink-0" onClick={resetVolunteerCategory}>
-                      <IconCloseCross />
+                    <button className="shrink-0 w-3.5 h-3.5" onClick={resetVolunteerCategory}>
+                      <IconCloseCross svg={{ className: "w-full h-full" }} />
                     </button>
                   </span>
                 )}
@@ -146,8 +148,14 @@ export const HomeVoterSection = (props: Props) => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-8 row-start-2 items-start">
-        {isError && (
+      <div className="relative flex flex-col gap-8 row-start-2 items-start">
+        {isFetching && !isFetchingNextPage && (
+          <div className="absolute size-full pt-24 mx-auto bg-purple/5 z-40">
+            <LoadingSpinner />
+          </div>
+        )}
+
+        {(isError || isRefetchError) && (
           <div className="flex flex-col items-center justify-center w-full h-52">
             <span className="text-center text-black/65">Oops! Terjadi kesalahan saat mengambil data 😿</span>
 

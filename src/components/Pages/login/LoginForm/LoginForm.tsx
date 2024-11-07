@@ -19,12 +19,14 @@ import { MainButton } from "@/components/Partials/Button";
 import { InputText } from "@/components/Partials/Input";
 import { IconEyeOff, IconEyeOn } from "@/components/Partials/Icons";
 import { LoginResponse } from "@/types";
+import { useAuth } from "@/contexts/AuthContext";
 
 type Props = {};
 
 export const LoginForm = (props: Props) => {
   const {} = props;
   const router = useRouter();
+  const { setIsAuthenticated } = useAuth();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -47,6 +49,7 @@ export const LoginForm = (props: Props) => {
     },
     onSuccess: (data) => {
       if (data.success) {
+        setIsAuthenticated(true);
         toast.success("Berhasil masuk! Menuju halaman utama...");
 
         router.push("/");
@@ -57,7 +60,7 @@ export const LoginForm = (props: Props) => {
     },
   });
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     loginMutation.mutate({

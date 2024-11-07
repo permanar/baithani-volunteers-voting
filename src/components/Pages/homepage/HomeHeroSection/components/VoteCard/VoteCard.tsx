@@ -5,10 +5,13 @@
  * @author Richie Permana <richie.permana@gmail.com>
  */
 
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 
 import { Volunteer } from "@/types";
 import { MainButton } from "@/components/Partials/Button";
+import { ModalVote } from "@/components/Views/Modal";
 
 type Props = {
   data: Volunteer;
@@ -16,6 +19,8 @@ type Props = {
 
 export const VoteCard = (props: Props) => {
   const { data } = props;
+
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="flex items-center justify-between gap-4 w-full rounded p-2.5 border border-purple/25">
@@ -40,10 +45,12 @@ export const VoteCard = (props: Props) => {
       </div>
 
       <div className="shrink-0">
-        <MainButton variant="text" className="p-0">
+        <MainButton variant="text" className="p-0" onClick={() => setIsOpen(true)}>
           Vote Sekarang
         </MainButton>
       </div>
+
+      <ModalVote isOpen={isOpen} onClose={() => setIsOpen(false)} data={data} />
     </div>
   );
 };

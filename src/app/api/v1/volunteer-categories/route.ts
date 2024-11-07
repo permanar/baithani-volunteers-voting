@@ -9,7 +9,7 @@ import { db } from "@/db/mysql2";
 import { withAuth } from "@/lib/api";
 import { NextResponse } from "next/server";
 
-export const GET = withAuth(async (req, session) => {
+export const GET = withAuth(async () => {
   try {
     const volunteerCategories = await db.query.volunteerCategories.findMany();
 
