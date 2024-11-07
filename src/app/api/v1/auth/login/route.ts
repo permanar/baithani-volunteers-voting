@@ -44,7 +44,7 @@ export const POST = async (req: NextRequest) => {
       .execute();
 
     if (!user) {
-      return NextResponse.json(
+      const response = NextResponse.json(
         {
           message: "User not found.",
           success: false,
@@ -53,6 +53,13 @@ export const POST = async (req: NextRequest) => {
           status: 404,
         }
       );
+
+      response.cookies.set("session", "", {
+        httpOnly: true,
+        maxAge: 0,
+      });
+
+      return response;
     }
 
     const valid = await bcrypt.compare(password, user.password);

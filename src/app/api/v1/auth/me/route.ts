@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 import jwt from "jsonwebtoken";
 import { eq, getTableColumns, sql } from "drizzle-orm";
@@ -7,7 +7,7 @@ import { db, Roles, roles, userRoles, users } from "@/db/mysql2";
 import { UserTokenJwtPayload } from "@/types";
 import { withAuth } from "@/lib/api";
 
-export const GET = withAuth(async (req: NextRequest, session) => {
+export const GET = withAuth(async (req, session) => {
   try {
     const userJwt = jwt.verify(session.value, process.env.AUTH_SECRET) as UserTokenJwtPayload;
     const userId = userJwt.id;
@@ -33,13 +33,20 @@ export const GET = withAuth(async (req: NextRequest, session) => {
       .limit(1);
 
     if (!rows.length) {
-      return NextResponse.json(
+      const response = NextResponse.json(
         {
           message: "User not found",
           success: false,
         },
         { status: 404 }
       );
+
+      response.cookies.set("session", "", {
+        httpOnly: true,
+        maxAge: 0,
+      });
+
+      return response;
     }
 
     return NextResponse.json(
