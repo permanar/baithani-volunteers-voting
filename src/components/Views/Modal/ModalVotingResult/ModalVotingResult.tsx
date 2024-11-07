@@ -44,7 +44,7 @@ export const ModalVotingResult = (props: Props) => {
       transition
       className="fixed inset-0 flex w-screen items-center justify-center p-4 transition duration-200 ease-out data-[closed]:opacity-0 z-1000 bg-black/30"
     >
-      <DialogPanel className="w-full max-w-lg space-y-4 px-5 py-4 rounded bg-white">
+      <DialogPanel className="w-full max-w-xl space-y-4 px-5 py-4 rounded bg-white">
         <div className="flex items-center justify-between gap-2.5">
           <DialogTitle className="font-bold max-w-56 lg:max-w-72">
             <span className="text-xl lg:text-3xl font-bold text-purple">Pemenang</span>{" "}
@@ -59,7 +59,7 @@ export const ModalVotingResult = (props: Props) => {
         </div>
 
         <div className="flex flex-col gap-4">
-          <div className="w-full max-w-md mx-auto">
+          <div className="w-full mx-auto">
             <div className="flex justify-between p-2.5 font-semibold text-base">
               <span className="w-1/12">No</span>
               <span className="w-4/12">Nama</span>
@@ -67,50 +67,56 @@ export const ModalVotingResult = (props: Props) => {
               <span className="text-right w-2/12">Total</span>
             </div>
 
-            {data && data.length > 0
-              ? data.map((item, idx) => (
-                  <div
-                    key={`voting-result-${item.id}-${idx}`}
-                    className="flex items-center justify-between gap-1 w-full rounded p-2.5 mb-2.5 border border-black/25 bg-white"
-                  >
-                    <div className="w-1/12">
-                      <div className="flex items-center justify-center w-4 h-4 lg:w-5 lg:h-5 text-2xs lg:text-sm font-semibold rounded-full bg-gray-300">
-                        {idx + 1}
-                      </div>
-                    </div>
-
-                    <div className="w-5/12 text-2xs lg:text-base whitespace-nowrap overflow-hidden text-ellipsis">
-                      {idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : null}
-                      <span title={item.voted_name}>{item.voted_name}</span>
-                    </div>
-
-                    <div className="text-right w-4/12">
-                      <div className="flex items-center justify-end gap-1">
-                        {item.voted_by.map((votedBy, idx) => (
-                          <div
-                            key={`voting-result-category-${item.id}-${idx}`}
-                            className="flex items-center justify-center w-4 h-4 lg:w-5 lg:h-5 uppercase text-2xs lg:text-sm font-semibold rounded-full bg-gray-300"
-                          >
-                            {votedBy.name}
-                          </div>
-                        ))}
-
-                        {item.total_votes > item.voted_by.length ? (
-                          <div className="flex items-center justify-center w-4 h-4 lg:w-5 lg:h-5 text-2xs lg:text-sm font-semibold rounded-full bg-gray-300">
-                            {item.total_votes - item.voted_by.length}+
-                          </div>
-                        ) : null}
-                      </div>
-                    </div>
-
-                    <div className="text-right w-2/12">
-                      <span className="shrink-0 ml-1 px-2.5 py-0.5 text-2xs lg:text-sm font-semibold rounded-full bg-purple/25 text-purple">
-                        {formatNumber(item.total_votes)}
-                      </span>
+            {data && data.length > 0 ? (
+              data.map((item, idx) => (
+                <div
+                  key={`voting-result-${item.id}-${idx}`}
+                  className="flex items-center justify-between gap-1 w-full rounded p-2.5 mb-2.5 border border-black/25 bg-white"
+                >
+                  <div className="w-1/12">
+                    <div className="flex items-center justify-center w-4 h-4 lg:w-5 lg:h-5 text-2xs lg:text-sm font-semibold rounded-full bg-gray-300">
+                      {idx + 1}
                     </div>
                   </div>
-                ))
-              : null}
+
+                  <div className="w-5/12 text-2xs lg:text-base whitespace-nowrap overflow-hidden text-ellipsis">
+                    {idx === 0 ? "🥇" : idx === 1 ? "🥈" : idx === 2 ? "🥉" : null}
+                    <span className="capitalize text-xs lg:text-base" title={item.voted_name}>
+                      {item.voted_name}
+                    </span>
+                  </div>
+
+                  <div className="text-right w-4/12">
+                    <div className="flex items-center justify-end gap-1">
+                      {item.voted_by.map((votedBy, idx) => (
+                        <div
+                          key={`voting-result-category-${item.id}-${idx}`}
+                          className="flex items-center justify-center w-4 h-4 lg:w-5 lg:h-5 uppercase text-2xs lg:text-sm font-semibold rounded-full bg-gray-300"
+                        >
+                          {votedBy.name}
+                        </div>
+                      ))}
+
+                      {item.total_votes > item.voted_by.length ? (
+                        <div className="flex items-center justify-center w-4 h-4 lg:w-5 lg:h-5 text-2xs lg:text-sm font-semibold rounded-full bg-gray-300">
+                          {item.total_votes - item.voted_by.length}+
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+
+                  <div className="text-right w-2/12">
+                    <span className="shrink-0 ml-1 px-2.5 py-0.5 text-2xs lg:text-sm font-semibold rounded-full bg-purple/25 text-purple">
+                      {formatNumber(item.total_votes)}
+                    </span>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="flex items-center justify-center w-full p-2.5 mt-2.5 font-semibold text-base">
+                <span className="text-center text-sm lg:text-base">Tidak ada data</span>
+              </div>
+            )}
           </div>
         </div>
       </DialogPanel>

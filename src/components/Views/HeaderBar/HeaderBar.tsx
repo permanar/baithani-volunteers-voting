@@ -27,7 +27,7 @@ type Props = {};
 
 export const HeaderBar = (props: Props) => {
   const {} = props;
-  const { user } = useAuth();
+  const { user, isAdmin } = useAuth();
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
@@ -84,7 +84,10 @@ export const HeaderBar = (props: Props) => {
             {user?.full_name?.charAt(0)}
           </div>
 
-          <span className="text-base font-semibold">{user?.full_name}</span>
+          <div className="flex flex-col">
+            <span className="text-base font-semibold">{user?.full_name}</span>
+            {isAdmin && <span className="text-xs font-semibold text-purple">Admin</span>}
+          </div>
         </div>
 
         <div className="flex flex-col gap-5">
@@ -168,17 +171,20 @@ export const HeaderBar = (props: Props) => {
             anchor="bottom end"
             className={cn(
               "flex flex-col gap-6",
-              "md:min-w-60 xl:min-w-80 mt-6 xl:mt-9 py-6 rounded-xl border border-purple/20 z-50",
+              "md:min-w-60 xl:min-w-80 ml-2 mt-4 xl:mt-9 py-6 rounded-xl border border-purple/20 z-50",
               "origin-top-right transition duration-100 ease-out data-[closed]:scale-95 data-[closed]:opacity-0"
             )}
           >
             <MenuItem>
               <div className="flex items-center gap-4 px-5">
-                <div className="flex items-center justify-center md:w-5 md:h-5 xl:w-7 xl:h-7 uppercase text-2xs md:text-sm xl:text-base font-semibold rounded-full bg-gray-300">
+                <div className="flex items-center justify-center md:w-6 md:h-6 xl:w-7 xl:h-7 uppercase text-2xs md:text-sm xl:text-base font-semibold rounded-full bg-gray-300">
                   {user?.full_name?.charAt(0)}
                 </div>
 
-                <span className="text-base font-semibold">{user?.full_name}</span>
+                <div className="flex flex-col">
+                  <span className="text-base font-semibold">{user?.full_name}</span>
+                  {isAdmin && <span className="text-base font-semibold text-purple">Admin</span>}
+                </div>
               </div>
             </MenuItem>
 
