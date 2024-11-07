@@ -41,7 +41,7 @@ export default async function Home() {
   const volunteerCategories = await getVolunteerCategories();
 
   return (
-    <div className="relative p-0.5">
+    <div className="relative container p-0.5 mx-auto">
       <HeaderBar />
 
       <HomeHeroSection />

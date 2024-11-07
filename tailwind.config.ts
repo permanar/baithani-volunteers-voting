@@ -1,6 +1,9 @@
 import type { Config } from "tailwindcss";
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
+const defaultTheme = require("tailwindcss/defaultTheme");
+
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const defaultColors = require("tailwindcss/colors");
 
 const config: Config = {
@@ -11,6 +14,14 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    screens: {
+      ...defaultTheme.screens,
+      xxs: "425px",
+      xs: "475px",
+      "2xl": "1440px",
+      "3xl": "1536px",
+    },
+
     extend: {
       fontFamily: {
         urbanist: ["var(--font-urbanist)", "sans-serif"],
@@ -25,10 +36,19 @@ const config: Config = {
       borderRadius: {
         "4xl": "2.25rem",
       },
+
+      zIndex: {
+        100: "100",
+        1000: "1000",
+      },
     },
 
     colors: {
-      red: defaultColors.red,
+      red: {
+        ...defaultColors.red,
+
+        500: "#DC3444",
+      },
 
       white: {
         DEFAULT: "#F8FFFA",
