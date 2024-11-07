@@ -35,21 +35,19 @@ export const HomeHeroSection = (props: Props) => {
         <div className="flex shrink-0 items-center justify-center w-5 h-5 lg:w-7 lg:h-7 rounded-full bg-purple">
           <IconChart svg={{ className: "lg:w-3 lg:h-3" }} />
         </div>
-        <span className="text-2xs lg:text-base font-semibold text-purple">
-          Suaramu, Apresiasi Terbaik untuk Mereka!
-        </span>
+        <span className="text-xs lg:text-base font-semibold text-purple">Suaramu, Apresiasi Terbaik untuk Mereka!</span>
       </div>
 
       <div className="flex flex-col items-center justify-center gap-1.5 text-center lg:max-w-[720px]">
-        <h1 className="text-xl lg:text-5xl/tight tracking-wide font-black">Pemilihan Pelayan Favorit 2024</h1>
-        <span className="text-2xs lg:text-lg tracking-[0.01em] font-medium text-black/65">
+        <h1 className="text-2xl lg:text-5xl/tight tracking-wide font-black">Pemilihan Pelayan Favorit 2024</h1>
+        <span className="text-xs lg:text-lg tracking-[0.01em] font-medium text-black/65">
           Ayo berikan suaramu dan apresiasi pelayan yang telah berdedikasi di gereja kita
         </span>
       </div>
 
       <div className="mt-2.5">
         <MainButton
-          className="gap-2 px-5 py-2 text-2xs lg:text-base"
+          className="gap-2"
           onClick={() => {
             const homeVoterSection = document.getElementById("home-voter-section");
 
