@@ -35,7 +35,7 @@ export const GET = withAuth(async (req, session) => {
     if (!rows.length) {
       const response = NextResponse.json(
         {
-          message: "User not found",
+          message: "User not found. Please re-login.",
           success: false,
         },
         { status: 404 }
