@@ -46,7 +46,7 @@ export const POST = async (req: NextRequest) => {
     if (!user) {
       const response = NextResponse.json(
         {
-          message: "User not found.",
+          message: "User not found. Please re-login.",
           success: false,
         },
         {
@@ -98,7 +98,7 @@ export const POST = async (req: NextRequest) => {
       id: user.id,
       full_name: user.full_name,
       username: user.username,
-      role: user.roles.map((role) => role.name).join(","),
+      roles: user.roles.map((role) => role.name).join(","),
     };
 
     const accessToken = jwt.sign(jwtPayload, process.env.AUTH_SECRET, {

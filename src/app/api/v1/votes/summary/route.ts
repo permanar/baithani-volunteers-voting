@@ -9,12 +9,12 @@ import { NextResponse } from "next/server";
 
 import { count, desc, eq, max, min, sql } from "drizzle-orm";
 
-import { withAuth } from "@/lib/api";
-import { db, Users, users, volunteerCategories, VolunteerCategories, volunteers, voters } from "@/db/mysql2";
+import { withRoles } from "@/lib/api";
+import { db, ROLES, Users, users, volunteerCategories, VolunteerCategories, volunteers, voters } from "@/db/mysql2";
 
 const MAX_VOTED_BY = 4;
 
-export const GET = withAuth(async () => {
+export const GET = withRoles([ROLES.ADMIN], async () => {
   try {
     const votesSummary = await db
       .select({
@@ -40,7 +40,7 @@ export const GET = withAuth(async () => {
       .leftJoin(sql<Users>`users as voter_user`, eq(sql`voter_user.id`, voters.user_id))
       .groupBy(voters.voted, users.id)
       .orderBy(desc(count().as("total_votes")))
-      .limit(MAX_VOTED_BY);
+      .limit(5);
 
     return NextResponse.json(
       {

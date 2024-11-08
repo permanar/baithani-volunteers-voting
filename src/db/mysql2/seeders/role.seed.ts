@@ -1,15 +1,21 @@
 import { eq } from "drizzle-orm";
 
 import { db } from "../mysql";
-import { roles, RolesInsert } from "../schema";
+import { ROLES, roles, RolesInsert } from "../schema";
 
 export async function seedRoles() {
   console.log(`\n🌱 Seeding: roles...`);
   console.time("⏱ Seeding Time");
 
   const allRoles: RolesInsert[] = [
-    { name: "admin", description: "Admin role" },
-    { name: "user", description: "User role" },
+    {
+      name: ROLES.ADMIN,
+      description: "Admin role",
+    },
+    {
+      name: ROLES.USER,
+      description: "User role",
+    },
   ];
 
   let count = 0;
