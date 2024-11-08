@@ -12,9 +12,9 @@ import { checkSession } from "@/lib/auth";
 import { Button, Stack } from "@mui/material";
 
 export default async function DashboardPage() {
-  const { isAuthenticated } = await checkSession();
+  const { isAuthenticated, isAdmin } = await checkSession();
 
-  if (!isAuthenticated) return redirect("/login");
+  if (!isAuthenticated || !isAdmin) return redirect("/login");
 
   return (
     <div>
