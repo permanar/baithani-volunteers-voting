@@ -9,31 +9,14 @@ import { NextResponse } from "next/server";
 
 import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
-import jwt from "jsonwebtoken";
 
-import { db, users } from "@/db/mysql2";
-import { withAuth } from "@/lib/api";
-import { UserTokenJwtPayload } from "@/types";
+import { db, ROLES, users } from "@/db/mysql2";
+import { withRoles } from "@/lib/api";
 
-export const POST = withAuth(async (req, session) => {
+export const POST = withRoles([ROLES.ADMIN], async (req) => {
   try {
     const request = await req.json();
     const { user_id, new_password } = request;
-
-    const userJwt = jwt.verify(session.value, process.env.AUTH_SECRET) as UserTokenJwtPayload;
-
-    // if the user is not an admin, then return 403 forbidden
-    if (!userJwt.role.split(",").includes("admin")) {
-      return NextResponse.json(
-        {
-          message: "Only admin can change other user's password.",
-          success: false,
-        },
-        {
-          status: 403,
-        }
-      );
-    }
 
     if (!user_id || !new_password) {
       return NextResponse.json(
