@@ -25,13 +25,13 @@ export const Footer = (props: Props) => {
       <span className="text-xs font-semibold">© 2024 GPT Baithani. All Rights Reserved.</span>
 
       <div className="flex items-center gap-2.5">
-        <Link href="https://www.youtube.com/@GPTBaithani" target="_blank" className="group">
+        <Link href="https://www.youtube.com/@GPTBaithani" target="_blank" aria-label="Youtube" className="group">
           <IconYoutube path={{ className: "group-hover:fill-purple" }} />
         </Link>
-        <Link href="https://www.instagram.com/gptbaithani" target="_blank" className="group">
+        <Link href="https://www.instagram.com/gptbaithani" target="_blank" aria-label="Instagram" className="group">
           <IconInstagram path={{ className: "group-hover:fill-purple" }} />
         </Link>
-        <Link href="https://www.facebook.com/baithani" target="_blank" className="group">
+        <Link href="https://www.facebook.com/baithani" target="_blank" aria-label="Facebook" className="group">
           <IconFacebook path={{ className: "group-hover:fill-purple" }} />
         </Link>
       </div>

@@ -131,6 +131,7 @@ export const HeaderBar = (props: Props) => {
 
       <button
         className="flex lg:hidden cursor-pointer group"
+        aria-label="Toggle drawer menu"
         onClick={() => {
           setIsDrawerOpen((prev) => !prev);
         }}
