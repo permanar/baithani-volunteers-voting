@@ -44,6 +44,7 @@ export const AuthProvider: React.FC<Props> = (props) => {
       return response.data;
     },
     enabled: !!isAuthenticated,
+    refetchOnWindowFocus: false,
   });
 
   const isAdmin = useMemo(() => {

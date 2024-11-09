@@ -38,7 +38,9 @@ export const InputText = (props: Props) => {
 
   return (
     <label className="flex flex-col">
-      {label && <span className={cn("text-xs text-gray-600", labelClassName)}>{label}</span>}
+      {label && (
+        <span className={cn("text-xs lg:text-base cursor-pointer text-gray-600", labelClassName)}>{label}</span>
+      )}
 
       <div
         className={cn(
@@ -57,14 +59,14 @@ export const InputText = (props: Props) => {
               prefixClassName
             )}
           >
-            <span className="text-xs">{prefix}</span>
+            <span className="text-xs lg:text-base">{prefix}</span>
           </div>
         )}
 
         <Input
           type={type}
           className={cn(
-            "block w-full py-1.5 px-3 text-sm",
+            "block w-full py-1.5 px-3 text-sm lg:text-base",
             "text-black dark:text-white bg-transparent",
             "focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25",
             "placeholder-gray-300 dark:placeholder-gray-500",
@@ -85,7 +87,7 @@ export const InputText = (props: Props) => {
               suffixClassName
             )}
           >
-            <span className="text-xs">{suffix}</span>
+            <span className="text-xs lg:text-base">{suffix}</span>
           </div>
         )}
       </div>

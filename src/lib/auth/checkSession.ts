@@ -5,21 +5,32 @@ import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 
 import { ApiClient } from "@/common/api";
-import { ProfileResponse } from "@/types";
+import { Profile, ProfileResponse, UserTokenJwtPayload } from "@/types";
 
-export const checkSession = async () => {
+type CheckSessionResponse = {
+  user?: Profile | null;
+
+  isAdmin: boolean;
+  isAuthenticated: boolean;
+};
+
+export const checkSession: () => Promise<CheckSessionResponse> = async () => {
   const cookieStore = await cookies();
   const session = cookieStore.get("session");
 
   if (!session?.value) {
     return {
-      isAuthenticated: false,
       user: null,
+
+      isAdmin: false,
+      isAuthenticated: false,
     };
   }
 
   try {
-    jwt.verify(session.value, process.env.AUTH_SECRET);
+    const userJwt = jwt.verify(session.value, process.env.AUTH_SECRET) as UserTokenJwtPayload;
+    const userRoles = userJwt.roles.split(",");
+    const isAdmin = userRoles.includes("admin");
 
     const { data } = await ApiClient<ProfileResponse>("/api/v1/auth/me", {
       headers: {
@@ -28,13 +39,17 @@ export const checkSession = async () => {
     });
 
     return {
-      isAuthenticated: true,
       user: data,
+
+      isAdmin,
+      isAuthenticated: true,
     };
   } catch {
     return {
-      isAuthenticated: false,
       user: null,
+
+      isAdmin: false,
+      isAuthenticated: false,
     };
   }
 };
