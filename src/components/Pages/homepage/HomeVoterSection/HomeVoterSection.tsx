@@ -60,7 +60,7 @@ export const HomeVoterSection = (props: Props) => {
           <h2 className="text-xl font-semibold">Bidang Pelayanan</h2>
 
           <Menu>
-            <MenuButton className="group">
+            <MenuButton className="group" aria-label="Pilih Kategori">
               <IconMenuHalfBurger svg={{ className: "group-hover:opacity-70" }} />
             </MenuButton>
 

@@ -110,7 +110,12 @@ export const POST = async (req: NextRequest) => {
         message: "Logged in successfully.",
         success: true,
         data: {
-          access_token: String(accessToken),
+          id: user.id,
+          full_name: user.full_name,
+          username: user.username,
+          roles: user.roles.map((role) => role.name),
+          created_at: user.created_at,
+          updated_at: user.updated_at,
         },
       },
       {

@@ -5,7 +5,6 @@ import { Toaster } from "react-hot-toast";
 
 import { cn } from "@/common/styles";
 import { mergeFontsVariable } from "@/common/utils";
-import { IconBgStar, IconBgStar2 } from "@/components/Partials/Icons";
 import { AppProviders } from "@/contexts/AppProviders";
 
 import "./globals.css";
@@ -13,6 +12,34 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Baithani Volunteers Day Voting",
   description: "Voting app for the volunteers of GPT Baithani.",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "Baithani Volunteers Day Voting",
+    description: "Voting app for the volunteers of GPT Baithani.",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1290,
+        height: 675,
+        type: "image/jpg",
+        alt: "Volunteers Day Voting",
+      },
+    ],
+  },
+  icons: [
+    {
+      url: "/android-chrome-192x192.png",
+      sizes: "192x192",
+      type: "image/png",
+    },
+    {
+      url: "/android-chrome-512x512.png",
+      sizes: "512x512",
+      type: "image/png",
+    },
+  ],
+  manifest: "/site.webmanifest",
 };
 
 export default async function RootLayout({
@@ -36,24 +63,15 @@ export default async function RootLayout({
             "relative min-h-[100vh] text-sm font-urbanist scroll-smooth antialiased bg-white"
           )}
         >
-          <div className="absolute top-[40vh] md:top-64 bottom-auto -left-52 md:-left-80 w-[468px] h-[468px] md:w-[638px] md:h-[638px] -z-10">
-            <IconBgStar svg={{ className: "w-full h-full" }} />
-          </div>
-          <div className="absolute top-0 md:-top-72 -right-64 w-[600px] h-[310px] md:h-[961px] -z-10">
-            <IconBgStar2 svg={{ className: "w-full h-full" }} />
-          </div>
+          <Toaster
+            position="bottom-right"
+            toastOptions={{
+              duration: 3000,
+              className: "text-sm",
+            }}
+          />
 
-          <main className="overflow-hidden">
-            <Toaster
-              position="bottom-right"
-              toastOptions={{
-                duration: 3000,
-                className: "text-sm",
-              }}
-            />
-
-            {children}
-          </main>
+          <main className="overflow-hidden">{children}</main>
         </body>
       </AppProviders>
     </html>

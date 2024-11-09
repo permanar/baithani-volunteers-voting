@@ -106,7 +106,9 @@ export const LoginForm = (props: Props) => {
             visible: loginMutation.isError && loginMutation.error.message,
           })}
         >
-          <span className="text-xs text-red-500">{loginMutation.isError && loginMutation.error.message}</span>
+          <span className="text-xs lg:text-base text-red-500">
+            {loginMutation.isError && loginMutation.error.message}
+          </span>
         </div>
 
         <div>

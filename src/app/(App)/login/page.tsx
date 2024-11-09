@@ -19,8 +19,8 @@ const LoginPage = async () => {
           </div>
         </div>
 
-        <h2 className="text-xl font-semibold">Login Form</h2>
-        <span className="text-xs">
+        <h2 className="text-xl lg:text-2xl font-semibold">Login Form</h2>
+        <span className="text-xs lg:text-sm">
           Selamat datang, silakan masuk ke dalam akun anda <br /> untuk melanjutkan.
         </span>
       </div>
