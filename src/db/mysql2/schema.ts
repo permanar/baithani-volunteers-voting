@@ -105,3 +105,8 @@ export type VolunteersInsert = typeof volunteers.$inferInsert;
 export type VotersInsert = typeof voters.$inferInsert;
 export type RolesInsert = typeof roles.$inferInsert;
 export type UserRolesInsert = typeof userRoles.$inferInsert;
+
+export const ROLES = {
+  ADMIN: "admin",
+  USER: "user",
+} as const;

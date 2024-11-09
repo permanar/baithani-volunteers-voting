@@ -60,7 +60,7 @@ export const ModalVotingResult = (props: Props) => {
 
         <div className="flex flex-col gap-4">
           <div className="w-full mx-auto">
-            <div className="flex justify-between p-2.5 font-semibold text-base">
+            <div className="flex justify-between p-2.5 font-semibold text-sm xxs:text-base">
               <span className="w-1/12">No</span>
               <span className="w-4/12">Nama</span>
               <span className="text-right w-5/12">Perhitungan Suara</span>

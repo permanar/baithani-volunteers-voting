@@ -26,7 +26,7 @@ export const withAuth = (handler: (req: NextRequest, session: RequestCookie) => 
 
       const response = NextResponse.json(
         {
-          message: "User session is invalid",
+          message: "User session is invalid. Please re-login.",
           cause: error.message,
           success: false,
         },

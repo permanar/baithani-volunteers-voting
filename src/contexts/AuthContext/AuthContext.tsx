@@ -50,12 +50,6 @@ export const AuthProvider: React.FC<Props> = (props) => {
     return (user?.roles && user.roles.filter((role) => role.name.includes("admin")).length > 0) || false;
   }, [user]);
 
-  useEffect(() => {
-    console.log({
-      isAuthenticated,
-    });
-  }, [isAuthenticated]);
-
   return (
     <AuthContext.Provider
       value={{
