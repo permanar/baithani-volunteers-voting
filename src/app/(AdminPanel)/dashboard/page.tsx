@@ -9,7 +9,8 @@ import React from "react";
 import { redirect } from "next/navigation";
 
 import { checkSession } from "@/lib/auth";
-import { Button, Stack } from "@mui/material";
+import { Box, Button, Stack } from "@mui/material";
+import { SideNav } from "@/components/Views/(Dashboard)/SideNav";
 
 export default async function DashboardPage() {
   const { isAuthenticated, isAdmin } = await checkSession();
@@ -17,7 +18,16 @@ export default async function DashboardPage() {
   if (!isAuthenticated || !isAdmin) return redirect("/login");
 
   return (
-    <div>
+    <Box
+      sx={{
+        bgcolor: "#000",
+        display: "flex",
+        flexDirection: "column",
+        position: "relative",
+        minHeight: "100%",
+      }}
+    >
+      <SideNav />
       DashboardPage
       <Stack>
         <Button variant="contained" color="primary">
@@ -28,6 +38,6 @@ export default async function DashboardPage() {
           Secondary
         </Button>
       </Stack>
-    </div>
+    </Box>
   );
 }
