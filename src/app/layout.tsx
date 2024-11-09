@@ -5,7 +5,6 @@ import { Toaster } from "react-hot-toast";
 
 import { cn } from "@/common/styles";
 import { mergeFontsVariable } from "@/common/utils";
-import { IconBgStar, IconBgStar2 } from "@/components/Partials/Icons";
 import { AppProviders } from "@/contexts/AppProviders";
 
 import "./globals.css";
@@ -13,6 +12,34 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Baithani Volunteers Day Voting",
   description: "Voting app for the volunteers of GPT Baithani.",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "Baithani Volunteers Day Voting",
+    description: "Voting app for the volunteers of GPT Baithani.",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1290,
+        height: 675,
+        type: "image/jpg",
+        alt: "Volunteers Day Voting",
+      },
+    ],
+  },
+  icons: [
+    {
+      url: "/android-chrome-192x192.png",
+      sizes: "192x192",
+      type: "image/png",
+    },
+    {
+      url: "/android-chrome-512x512.png",
+      sizes: "512x512",
+      type: "image/png",
+    },
+  ],
+  manifest: "/site.webmanifest",
 };
 
 export default async function RootLayout({

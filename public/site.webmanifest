@@ -1,1 +1,35 @@
-{"name":"","short_name":"","icons":[{"src":"/android-chrome-192x192.png","sizes":"192x192","type":"image/png"},{"src":"/android-chrome-512x512.png","sizes":"512x512","type":"image/png"}],"theme_color":"#ffffff","background_color":"#ffffff","display":"standalone"}
+{
+  "name": "Baithani Volunteers Day Voting",
+  "short_name": "Volunteers Voting",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/og-image.jpg",
+      "sizes": "1290x675",
+      "type": "image/jpg",
+      "form_factor": "wide",
+      "label": "Volunteers Voting"
+    }
+  ],
+  "start_url": "/?source=pwa",
+  "theme_color": "#CC7EAC",
+  "background_color": "#F8FFFA",
+  "display": "standalone"
+}
