@@ -165,48 +165,52 @@ export const ModalVotingResult = (props: Props) => {
             <span className="text-right w-4/12">Belum Memilih</span>
           </div>
 
-          {data?.category_votes_summary && data.category_votes_summary.length > 0
-            ? data.category_votes_summary.map((item, idx) => (
-                <div
-                  key={`voting-result-category-${item.category_name}-${idx}`}
-                  className="flex items-center justify-between gap-1 w-full rounded p-2.5 mb-2.5 border border-black/25 bg-white"
-                >
-                  <div className="w-4/12 text-2xs lg:text-base whitespace-nowrap overflow-hidden text-ellipsis">
-                    <span className="capitalize text-xs lg:text-base" title={item.category_name}>
-                      {item.category_name}
-                    </span>
-                  </div>
-
-                  <div className="text-right w-4/12 text-xs xxs:text-xs lg:text-sm">
-                    <span className="shrink-0 ml-1 px-2.5 py-0.5 font-semibold rounded-full bg-purple/25 text-purple">
-                      {formatNumber(item.total_voted)}
-                    </span>{" "}
-                    <br />
-                    <span className="italic font-semibold">
-                      (
-                      {item.total_volunteers && item.total_volunteers > 0
-                        ? `${((item.total_voted / item.total_volunteers) * 100).toFixed(2)}%`
-                        : "0%"}
-                      )
-                    </span>
-                  </div>
-
-                  <div className="text-right w-4/12 text-xs xxs:text-xs lg:text-sm">
-                    <span className="shrink-0 ml-1 px-2.5 py-0.5 font-semibold rounded-full bg-purple/25 text-purple">
-                      {formatNumber(item.pending_votes)}
-                    </span>{" "}
-                    <br />
-                    <span className="italic font-semibold">
-                      (
-                      {item.total_volunteers && item.total_volunteers > 0
-                        ? `${((item.pending_votes / item.total_volunteers) * 100).toFixed(2)}%`
-                        : "0%"}
-                      )
-                    </span>
-                  </div>
+          {data?.category_votes_summary && data.category_votes_summary.length > 0 ? (
+            data.category_votes_summary.map((item, idx) => (
+              <div
+                key={`voting-result-category-${item.category_name}-${idx}`}
+                className="flex items-center justify-between gap-1 w-full rounded p-2.5 mb-2.5 border border-black/25 bg-white"
+              >
+                <div className="w-4/12 text-2xs lg:text-base whitespace-nowrap overflow-hidden text-ellipsis">
+                  <span className="capitalize text-xs lg:text-base" title={item.category_name}>
+                    {item.category_name}
+                  </span>
                 </div>
-              ))
-            : null}
+
+                <div className="text-right w-4/12 text-xs xxs:text-xs lg:text-sm">
+                  <span className="shrink-0 ml-1 px-2.5 py-0.5 font-semibold rounded-full bg-purple/25 text-purple">
+                    {formatNumber(item.total_voted)}
+                  </span>{" "}
+                  <br />
+                  <span className="italic font-semibold">
+                    (
+                    {item.total_volunteers && item.total_volunteers > 0
+                      ? `${((item.total_voted / item.total_volunteers) * 100).toFixed(2)}%`
+                      : "0%"}
+                    )
+                  </span>
+                </div>
+
+                <div className="text-right w-4/12 text-xs xxs:text-xs lg:text-sm">
+                  <span className="shrink-0 ml-1 px-2.5 py-0.5 font-semibold rounded-full bg-purple/25 text-purple">
+                    {formatNumber(item.pending_votes)}
+                  </span>{" "}
+                  <br />
+                  <span className="italic font-semibold">
+                    (
+                    {item.total_volunteers && item.total_volunteers > 0
+                      ? `${((item.pending_votes / item.total_volunteers) * 100).toFixed(2)}%`
+                      : "0%"}
+                    )
+                  </span>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="flex items-center justify-center w-full p-2.5 mt-2.5 font-semibold text-base">
+              <span className="text-center text-sm lg:text-base">Tidak ada data</span>
+            </div>
+          )}
         </div>
       </DialogPanel>
     </Dialog>
