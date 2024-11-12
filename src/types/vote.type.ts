@@ -7,6 +7,21 @@ export type Vote = {
 };
 
 export type VotesSummary = {
+  total_voters: number;
+  total_votes: number;
+  pending_votes: number;
+  category_votes_summary: CategoryVotesSummary[];
+  top_voted_summary: TopVotedSummary[];
+};
+
+export type CategoryVotesSummary = {
+  category_name: string;
+  total_volunteers: number;
+  total_voted: number;
+  pending_votes: number;
+};
+
+export type TopVotedSummary = {
   id: number;
   voted_name: string;
   volunteer_categories: Pick<VolunteerCategory, "name">[];
@@ -19,4 +34,4 @@ export type VotesSummary = {
 };
 
 export type VoteResponse = BaseAPIResponse<Vote>;
-export type VotesSummaryResponse = BaseAPIResponse<VotesSummary[]>;
+export type VotesSummaryResponse = BaseAPIResponse<VotesSummary>;

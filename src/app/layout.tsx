@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { cookies } from "next/headers";
 
 import { Toaster } from "react-hot-toast";
@@ -8,6 +8,10 @@ import { mergeFontsVariable } from "@/common/utils";
 import { AppProviders } from "@/contexts/AppProviders";
 
 import "./globals.css";
+
+export const viewport: Viewport = {
+  themeColor: "#CC7EAC",
+};
 
 export const metadata: Metadata = {
   title: "Baithani Volunteers Day Voting",
