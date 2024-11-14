@@ -14,8 +14,24 @@ import { db, ROLES, Users, users, volunteerCategories, VolunteerCategories, volu
 
 const MAX_VOTED_BY = 4;
 
-export const GET = withRoles([ROLES.ADMIN], async () => {
+export const GET = withRoles([ROLES.ADMIN], async (req) => {
   try {
+    const searchParams = req.nextUrl.searchParams;
+
+    const topVotedLimit = searchParams.get("top_voted_limit") || 5;
+
+    if (isNaN(Number(topVotedLimit))) {
+      return NextResponse.json(
+        {
+          message: "Limit has to be a number.",
+          success: false,
+        },
+        {
+          status: 400,
+        }
+      );
+    }
+
     const votesSummary = await db
       .select({
         id: min(voters.id),
@@ -40,7 +56,7 @@ export const GET = withRoles([ROLES.ADMIN], async () => {
       .leftJoin(sql<Users>`users as voter_user`, eq(sql`voter_user.id`, voters.user_id))
       .groupBy(voters.voted, users.id)
       .orderBy(desc(count().as("total_votes")), asc(users.full_name))
-      .limit(5);
+      .limit(Number(topVotedLimit));
 
     const totalVoters = await db
       .select({
